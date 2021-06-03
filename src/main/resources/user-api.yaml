@@ -1,0 +1,156 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: User Serivce
+  description: This User api demo
+
+tags:
+  - name: "User"
+
+paths:
+  /user/addUser:
+    post:
+      summary: Adding User
+      tags:
+        - "Users"
+      description: AddingUser
+      operationId: addUser
+      parameters:
+        - name: body
+          in: header
+          description: adding user to resource
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+
+
+
+
+
+      responses:
+        201:
+          description: User Added Successfully
+
+
+  /user/deleteUser/{userId}:
+    get:
+      summary: Delete User By ID
+      tags:
+        - "User"
+      description: Get User By Id
+      operationId: deleteUserById
+
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: "integer"
+            example: 4
+
+      responses:
+        204:
+          description: Succesfully Deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+        400:
+          description: in valid request/please check with url
+        403:
+          description: Access Denied
+        404:
+          description: Currently the request Resource is not avialble
+
+
+  /user/getAllUSers:
+    get:
+      summary: Get All Users
+      tags:
+        - " Users"
+      description: Get All Users with CorressPondind Address
+      operationId: getListOfUsers
+
+
+      responses:
+        200:
+          description: Succesfully Retrived All Users with Coressponding Addres
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+        400:
+          description: in valid request/please check with url
+        403:
+          description: Access Denied
+        404:
+          description: Currently the request Resource is not avialble
+
+  /user/getUserById/{userId}:
+    get:
+      summary: get User By ID
+      tags:
+        - "User"
+      description: Get User By Id
+      operationId: getUserById
+
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: "integer"
+            example: 4
+
+      responses:
+        200:
+          description: Succesfully Retrived All Users with Coressponding Addres
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+        400:
+          description: in valid request/please check with url
+        403:
+          description: Access Denied
+        404:
+          description: Currently the request Resource is not avialble
+
+
+
+
+
+components:
+  schemas:
+    User:
+      description: User Model
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        aid:
+          type: integer
+    Address:
+      description: Address Model
+      type: object
+      properties:
+        id:
+          type: integer
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: integer
